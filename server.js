@@ -26,6 +26,44 @@ app.set('views', './views')
 
 console.log('Let op: Er zijn nog geen routes. Voeg hier dus eerst jouw GET en POST routes toe.')
 
+
+//index.liquid
+app.get('/', async function (request, response) {
+
+  let stories = await fetch('https://fdnd-agency.directus.app/items/tm_story?fields=*,audio.audio_file,audio.transcript')
+
+  let storiesJSON = await stories.json()
+
+  console.log(storiesJSON)
+   // Render index.liquid uit de Views map
+   // Geef hier eventueel data aan mee
+   response.render('index.liquid', { stories: storiesJSON.data })
+})
+
+app.post('/', async function (request, response) {
+
+  response.redirect(303, '/')
+})
+
+//story unieke slug
+app.get('/story/:id', async function (request, response) {
+  const storyResponse = await fetch(`https://fdnd-agency.directus.app/items/tm_story?filter={"id":"${request.params.id}"}&fields=*,audio.audio_file,audio.transcript`);
+  const storyResponseJSON = await storyResponse.json();
+
+  // Controleer of er data is voor de opgegeven story
+  if (!storyResponseJSON.data || storyResponseJSON.data.length === 0) {
+    return response.status(404).send('Story not found');
+  }
+
+  // Render de 'story.liquid' pagina met de opgehaalde story data
+  response.render('story.liquid', { story: storyResponseJSON.data[0] });
+});
+
+app.use((req, res, next) => {
+  res.redirect('/'); // Gebruiker wordt doorgestuurd naar de /home pagina
+});
+
+
 /*
 // Zie https://expressjs.com/en/5x/api.html#app.get.method over app.get()
 app.get(…, async function (request, response) {
