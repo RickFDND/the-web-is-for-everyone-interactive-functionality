@@ -63,12 +63,12 @@
 <section class="liked-playlist">
     <h2>Liked playlist</h2>
     <ul>
-        {% for story in stories limit:2 %}
+        {% for playlist in playlists limit:5 %}
         <li class="liked-playlist-story">
-            <img src="https://fdnd-agency.directus.app/assets/{{ story.image }}">
-            <h3>{{ story.title }}</h3>
+            <img src="https://fdnd-agency.directus.app/assets/{{ playlist.image }}">
+            <h3>{{ playlist.title }}</h3>
             <a>Playbutton</a>
-            <p>{{ story.playtime }}</p>
+            <p>{{ playlist.language_id }}</p>
 
             <form action="">
                 <button type="submit">♡</button>
@@ -81,12 +81,12 @@
 <section class="suggested-playlist">
     <h2>Suggested playlist</h2>
     <ul>
-        {% for story in stories limit:3 %}
+        {% for playlist in playlists limit:5 %}
         <li class="liked-playlist-story">
-            <img src="https://fdnd-agency.directus.app/assets/{{ story.image }}">
-            <h3>{{ story.title }}</h3>
+            <img src="https://fdnd-agency.directus.app/assets/{{ playlist.image }}">
+            <h3>{{ playlist.title }}</h3>
             <a>Playbutton</a>
-            <p>{{ story.playtime }}</p>
+            <p>{{ playlist.language_id }}</p>
 
             <form action="">
                 <button type="submit">♡</button>

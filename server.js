@@ -38,6 +38,7 @@ app.get('/', async function (request, response) {
   const playlistJSON = await playlist.json()
 
   console.log(storiesJSON)
+  console.log(playlistJSON)
   // Zie https://expressjs.com/en/5x/api.html#res.render over response.render()
   response.render('index.liquid', { stories: storiesJSON.data, playlists: playlistJSON.data })
 })
