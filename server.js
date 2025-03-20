@@ -46,8 +46,9 @@ app.get('/', async function (request, response) {
 
 
 // Zie https://expressjs.com/en/5x/api.html#app.post.method over app.post()
-app.post('/', async function (request, response) {
-
+app.post('/like/:playlistId', async function (request, response) {
+  
+  
   // In request.body zitten alle formuliervelden die een `name` attribuut hebben in je HTML
   console.log(request.body)
 
@@ -57,7 +58,7 @@ app.post('/', async function (request, response) {
   // Zie https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify over JSON.stringify()
   // Zie https://docs.directus.io/reference/items.html#create-an-item over het toevoegen van gegevens in Directus
   // Zie https://docs.directus.io/reference/items.html#update-an-item over het veranderen van gegevens in Directus
-  await fetch('', {
+   = await fetch(`https://fdnd-agency.directus.app/items/tm_playlist/${request.params.id}`, {
     method: 'POST',
     body: JSON.stringify({
       //??//,
@@ -71,9 +72,7 @@ app.post('/', async function (request, response) {
   // Zie https://expressjs.com/en/5x/api.html#res.redirect over response.redirect()
   response.redirect(303, '/')
 })
-
-
-
+  
 //story unieke slug
 app.get('/story/:id', async function (request, response) {
   

@@ -88,8 +88,10 @@
             <a>Playbutton</a>
             <p>{{ playlist.language_id }}</p>
 
-            <form action="">
-                <button type="submit">♡</button>
+            <form action="/like/{{ playlist.id }}" method="POST">
+                <button type="submit">
+                {% if playlist.liked %}❤️{% else %}♡{% endif %}
+                </button>
             </form>
         </li>
         {% endfor %}
