@@ -26,28 +26,60 @@ app.set('views', './views')
 
 console.log('Let op: Er zijn nog geen routes. Voeg hier dus eerst jouw GET en POST routes toe.')
 
+// Zie https://expressjs.com/en/5x/api.html#app.get.method over app.get()
 
-//index.liquid
 app.get('/', async function (request, response) {
 
-  let stories = await fetch('https://fdnd-agency.directus.app/items/tm_story?fields=*,audio.audio_file,audio.transcript')
+  const stories = await fetch('https://fdnd-agency.directus.app/items/tm_story?fields=*,audio.audio_file,audio.transcript')
+  const playlist = await fetch(`https://fdnd-agency.directus.app/items/tm_playlist`)
 
-  let storiesJSON = await stories.json()
+  
+  const storiesJSON = await stories.json()
+  const playlistJSON = await playlist.json()
 
   console.log(storiesJSON)
-   // Render index.liquid uit de Views map
-   // Geef hier eventueel data aan mee
-   response.render('index.liquid', { stories: storiesJSON.data })
+  // Zie https://expressjs.com/en/5x/api.html#res.render over response.render()
+  response.render('index.liquid', { stories: storiesJSON.data, playlists: playlistJSON.data })
 })
 
+
+
+// Zie https://expressjs.com/en/5x/api.html#app.post.method over app.post()
 app.post('/', async function (request, response) {
 
+  // In request.body zitten alle formuliervelden die een `name` attribuut hebben in je HTML
+  console.log(request.body)
+
+  // Via een fetch() naar Directus vullen we nieuwe gegevens in
+
+  // Zie https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch over fetch()
+  // Zie https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify over JSON.stringify()
+  // Zie https://docs.directus.io/reference/items.html#create-an-item over het toevoegen van gegevens in Directus
+  // Zie https://docs.directus.io/reference/items.html#update-an-item over het veranderen van gegevens in Directus
+  await fetch('', {
+    method: 'POST',
+    body: JSON.stringify({
+      //??//,
+    }),
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  });
+
+  // Redirect de gebruiker daarna naar een logische volgende stap
+  // Zie https://expressjs.com/en/5x/api.html#res.redirect over response.redirect()
   response.redirect(303, '/')
 })
 
+
+
 //story unieke slug
 app.get('/story/:id', async function (request, response) {
+  
+  //fetch naar de id vd unieke slug
   const storyResponse = await fetch(`https://fdnd-agency.directus.app/items/tm_story?filter={"id":"${request.params.id}"}&fields=*,audio.audio_file,audio.transcript`);
+  
+  //zet om naar json data
   const storyResponseJSON = await storyResponse.json();
 
   // Controleer of er data is voor de opgegeven story
@@ -63,42 +95,6 @@ app.use((req, res, next) => {
   res.redirect('/'); // Gebruiker wordt doorgestuurd naar de /home pagina
 });
 
-
-/*
-// Zie https://expressjs.com/en/5x/api.html#app.get.method over app.get()
-app.get(…, async function (request, response) {
-  
-  // Zie https://expressjs.com/en/5x/api.html#res.render over response.render()
-  response.render(…)
-})
-*/
-
-/*
-// Zie https://expressjs.com/en/5x/api.html#app.post.method over app.post()
-app.post(…, async function (request, response) {
-
-  // In request.body zitten alle formuliervelden die een `name` attribuut hebben in je HTML
-  console.log(request.body)
-
-  // Via een fetch() naar Directus vullen we nieuwe gegevens in
-
-  // Zie https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch over fetch()
-  // Zie https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify over JSON.stringify()
-  // Zie https://docs.directus.io/reference/items.html#create-an-item over het toevoegen van gegevens in Directus
-  // Zie https://docs.directus.io/reference/items.html#update-an-item over het veranderen van gegevens in Directus
-  await fetch(…, {
-    method: …,
-    body: JSON.stringify(…),
-    headers: {
-      'Content-Type': 'application/json;charset=UTF-8'
-    }
-  });
-
-  // Redirect de gebruiker daarna naar een logische volgende stap
-  // Zie https://expressjs.com/en/5x/api.html#res.redirect over response.redirect()
-  response.redirect(303, …)
-})
-*/
 
 
 // Stel het poortnummer in waar Express op moet gaan luisteren
