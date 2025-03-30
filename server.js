@@ -30,24 +30,26 @@ console.log('Let op: Er zijn nog geen routes. Voeg hier dus eerst jouw GET en PO
 
 app.get('/', async function (request, response) {
 
-  const stories = await fetch('https://fdnd-agency.directus.app/items/tm_story?fields=*,audio.audio_file,audio.transcript')
-  const playlist = await fetch(`https://fdnd-agency.directus.app/items/tm_playlist`)
-
+  const stories = await fetch('https://fdnd-agency.directus.app/items/tm_story?fields=*,audio.audio_file,audio.transcript');
+  const playlist = await fetch(`https://fdnd-agency.directus.app/items/tm_playlist`);
+  const likes = await fetch('https://fdnd-agency.directus.app/items/tm_likes?fields=playlist.*');
   
-  const storiesJSON = await stories.json()
-  const playlistJSON = await playlist.json()
+  const storiesJSON = await stories.json();
+  const playlistJSON = await playlist.json();
+  const likesJSON = await likes.json();
 
   console.log(storiesJSON)
   console.log(playlistJSON)
+  console.log(likesJSON)
   // Zie https://expressjs.com/en/5x/api.html#res.render over response.render()
-  response.render('index.liquid', { stories: storiesJSON.data, playlists: playlistJSON.data })
+  response.render('index.liquid', { stories: storiesJSON.data, playlists: playlistJSON.data, likedPlaylist: likesJSON.data })
 })
 
 
 
 // Zie https://expressjs.com/en/5x/api.html#app.post.method over app.post()
-app.post('/like/:playlistId', async function (request, response) {
-  
+app.post('/:playlistId/like', async function (request, response) {
+  const playlistId = request.params.playlistId;
   
   // In request.body zitten alle formuliervelden die een `name` attribuut hebben in je HTML
   console.log(request.body)
@@ -58,10 +60,10 @@ app.post('/like/:playlistId', async function (request, response) {
   // Zie https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify over JSON.stringify()
   // Zie https://docs.directus.io/reference/items.html#create-an-item over het toevoegen van gegevens in Directus
   // Zie https://docs.directus.io/reference/items.html#update-an-item over het veranderen van gegevens in Directus
-   = await fetch(`https://fdnd-agency.directus.app/items/tm_playlist/${request.params.id}`, {
+    await fetch(`https://fdnd-agency.directus.app/items/tm_likes`, {
     method: 'POST',
     body: JSON.stringify({
-      //??//,
+      playlist: playlistId,
     }),
     headers: {
       'Content-Type': 'application/json;charset=UTF-8'
