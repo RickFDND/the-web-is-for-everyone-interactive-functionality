@@ -63,7 +63,7 @@
 <section class="liked-playlist">
     <h2>Liked playlist</h2>
     <ul>
-        {% for liked in likedPlaylist limit:5 %}
+        {% for liked in likes limit:5 %}
         <li class="liked-playlist-story">
             <img src="https://fdnd-agency.directus.app/assets/{{ liked.playlist.image }}">
             <h3>{{ liked.playlist.title }}</h3>
