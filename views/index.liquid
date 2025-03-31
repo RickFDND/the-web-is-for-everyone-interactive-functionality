@@ -62,8 +62,9 @@
 
 <section class="liked-playlist">
     <h2>Liked playlist</h2>
-    <ul>
-        {% for liked in likes limit:5 %}
+    {{ likes | json:4 }}
+    <ol>
+        {% for liked in likes %}
         <li class="liked-playlist-story">
             <img src="https://fdnd-agency.directus.app/assets/{{ liked.playlist.image }}">
             <h3>{{ liked.playlist.title }}</h3>
@@ -75,13 +76,15 @@
             </form>
         </li>
         {% endfor %}
-    </ul>
+    </ol>
 </section>
 
 <section class="suggested-playlist">
     <h2>Suggested playlist</h2>
-    <ul>
-        {% for playlist in playlists limit:5 %}
+    {{ playlists | json:4 }}
+    <ol>
+
+        {% for playlist in playlists %}
         <li class="liked-playlist-story">
             <img src="https://fdnd-agency.directus.app/assets/{{ playlist.image }}">
             <h3>{{ playlist.title }}</h3>
@@ -93,7 +96,7 @@
             </form>
         </li>
         {% endfor %}
-    </ul>
+    </ol>
 </section>
 
 {% render 'partials/footer.liquid' %}

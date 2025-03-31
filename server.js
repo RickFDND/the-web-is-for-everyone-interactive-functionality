@@ -32,7 +32,7 @@ app.get('/', async function (request, response) {
 
   const stories = await fetch('https://fdnd-agency.directus.app/items/tm_story?fields=*,audio.audio_file,audio.transcript');
   const playlist = await fetch(`https://fdnd-agency.directus.app/items/tm_playlist`);
-  const likes = await fetch('https://fdnd-agency.directus.app/items/tm_likes?filter[profile]=126');
+  const likes = await fetch('https://fdnd-agency.directus.app/items/tm_likes?filter[profile]=126&fields=*.*');
   
   const storiesJSON = await stories.json();
   const playlistJSON = await playlist.json();
