@@ -7,7 +7,7 @@
 <section class="own-playlist">
     <h2>Own playlist</h2>
     <ul>
-        {% for story in stories limit:8 %}
+        {% for story in stories limit:7 %}
         <li class="own-playlist-story">
             <img src="https://fdnd-agency.directus.app/assets/{{ story.image }}">
             <h3>{{ story.title }}</h3>
@@ -62,33 +62,30 @@
 
 <section class="liked-playlist">
     <h2>Liked playlist</h2>
-    {{ likes | json:4 }}
-    <ol>
+    <ul>
         {% for liked in likes %}
         <li class="liked-playlist-story">
             <img src="https://fdnd-agency.directus.app/assets/{{ liked.playlist.image }}">
             <h3>{{ liked.playlist.title }}</h3>
-            <a>Playbutton</a>
-            <p>{{ liked.playlist.language_id }}</p>
+            <a><svg class="play-button" width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.0874 7.06141C10.7817 6.52417 10.7817 5.47595 10.0874 4.93871C7.98914 3.31514 5.6461 2.03543 3.14602 1.14749L2.68929 0.985277C1.8155 0.674939 0.892544 1.26613 0.774251 2.16812C0.443739 4.68826 0.443739 7.31186 0.774251 9.83201C0.892543 10.734 1.8155 11.3252 2.68929 11.0148L3.14602 10.8526C5.6461 9.96469 7.98914 8.68498 10.0874 7.06141Z" fill="white"/></svg></a>
+            <p>{{ liked.playlist.playtime }}1 min</p>
 
             <form action="/{{ liked.playlist.id }}/like" method="POST">
                 <button type="submit">❤️</button>
             </form>
         </li>
         {% endfor %}
-    </ol>
+    </ul>
 </section>
 
 <section class="suggested-playlist">
     <h2>Suggested playlist</h2>
-    {{ playlists | json:4 }}
-    <ol>
-
+    <ul>
         {% for playlist in playlists %}
-        <li class="liked-playlist-story">
+        <li class="suggested-playlist-story">
             <img src="https://fdnd-agency.directus.app/assets/{{ playlist.image }}">
             <h3>{{ playlist.title }}</h3>
-            <a>Playbutton</a>
+            <a><svg class="play-button" width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.0874 7.06141C10.7817 6.52417 10.7817 5.47595 10.0874 4.93871C7.98914 3.31514 5.6461 2.03543 3.14602 1.14749L2.68929 0.985277C1.8155 0.674939 0.892544 1.26613 0.774251 2.16812C0.443739 4.68826 0.443739 7.31186 0.774251 9.83201C0.892543 10.734 1.8155 11.3252 2.68929 11.0148L3.14602 10.8526C5.6461 9.96469 7.98914 8.68498 10.0874 7.06141Z" fill="white"/></svg></a>
             <p>{{ playlist.language_id }}</p>
 
             <form action="/{{ playlist.id }}/like" method="POST">
@@ -96,7 +93,7 @@
             </form>
         </li>
         {% endfor %}
-    </ol>
+    </ul>
 </section>
 
 {% render 'partials/footer.liquid' %}

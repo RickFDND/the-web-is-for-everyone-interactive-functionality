@@ -99,8 +99,8 @@ header {
     }
 }
 
-/* Section own-playlist */
-.own-playlist {
+/* Section own-playlist, liked-playlist en suggested-playlist */
+.own-playlist, .liked-playlist, .suggested-playlist {
 
     ul {
         display: flex;
@@ -115,6 +115,7 @@ header {
             padding: 1.2em;
             border-radius: 8px;
             min-width: 136px;
+            width: 176.76px;
         }
 
         /* list van own-playlist-story */
@@ -156,6 +157,8 @@ header {
             flex-direction: column;
             background-color: #494375;
             color: white;
+            min-width: 136px;
+            width: 176.76px;
 
             span {
                 background-color: white;
@@ -178,6 +181,33 @@ header {
 
             p {
                 padding-top: 2em;
+            }
+        }
+
+        /*liked-playlist-story, suggested-playlist-story */
+        .liked-playlist-story, .suggested-playlist-story {
+            display: grid;
+            background-color: white;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 5fr 2fr 2fr;
+            width: 136px;
+
+            img {
+                max-width: 180px;
+                height: 115px;
+                border-radius: 4px;
+                grid-row: 1;
+                grid-column: span 3;
+                margin-inline: auto;
+            }
+
+            h3 {
+                grid-row: 2;
+                grid-column: span 3;
+            }
+
+            p {
+                margin: 0;
             }
         }
     }
@@ -299,10 +329,10 @@ header {
     }
 }
 
-
-
-
-
-img {
-    max-width: 100px;
+.header-story {
+    display: flex;
 }
+
+
+
+
