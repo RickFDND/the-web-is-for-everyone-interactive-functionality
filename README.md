@@ -16,7 +16,7 @@ De instructie vind je in: [INSTRUCTIONS.md](https://github.com/fdnd-task/the-web
 
 ## Beschrijving
 Ik heb een voor mijn opdrachtgever Tumi Mundo een all-stories page, en een detail pagina die naar een unieke story leid.
-<img src="/public/IMG/readme.png">
+<img src="/public/IMG/readme.png" height="300" width="auto" >
 Hier de pagina: https://the-web-is-for-everyone-interactive-xyib.onrender.com/
 
 ## Gebruik
@@ -27,7 +27,7 @@ Ik heb hiervoor een userstory geschreven:
 <img src="/public/IMG/userstory.png" height="100">
 
 en een wireflow gemaakt:
-<img src="/public/IMG/wireflow.png" height="200" width="100">
+<img src="/public/IMG/wireflow.png" height="300" width="150">
 
 ## Kenmerken
 In mijn project heb ik een interactieve webapplicatie gebouwd met Node.js, Express, Liquid, Directus en client-side JavaScript. Daarnaast heb ik natuurlijk ook HTML en CSS gebruikt 
