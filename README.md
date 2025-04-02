@@ -24,9 +24,11 @@ Hier de pagina: https://the-web-is-for-everyone-interactive-xyib.onrender.com/
 Ik heb een post-route aangemaakt waarmee ik via een profile een playlist kan liken. Deze playlist gaat na het klikken op de likeknop van de suggested playlists naar de liked playlists. 
 
 Ik heb hiervoor een userstory geschreven: 
+
 <img src="/public/IMG/userstory.png" height="100">
 
 en een wireflow gemaakt:
+
 <img src="/public/IMG/wireflow.png" height="300" width="150">
 
 ## Kenmerken
